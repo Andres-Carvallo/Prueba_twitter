@@ -1,10 +1,15 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 
+
   # GET /tweets
   # GET /tweets.json
   def index
-    @tweets = Tweet.all
+
+    @tweets= Tweet.order('created_at DESC').page(params[:page]).per(50)
+
+    
+  
   end
 
   # GET /tweets/1

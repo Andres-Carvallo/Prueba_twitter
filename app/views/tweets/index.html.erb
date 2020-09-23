@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>Tweets</h1>
 
@@ -17,7 +17,7 @@
     <% @tweets.each do |tweet| %>
       <tr>
         <td><%= tweet.content %></td>
-        <td><%= tweet.picture %></td>
+        <td><%= image_tag tweet.user.image_url %></td>
         <td><%= tweet.retweet_number %></td>
         <td><%= tweet.likes_number %></td>
         <td><%= link_to 'Show', tweet %></td>
@@ -31,3 +31,4 @@
 <br>
 
 <%= link_to 'New Tweet', new_tweet_path %>
+<%= paginate(@tweets) %>

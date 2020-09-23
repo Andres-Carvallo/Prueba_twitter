@@ -20,16 +20,13 @@
           <ul class="dropdown-menu"> 
             <% if current_user %> 
                 <li><%=link_to 'Create Tweet', new_tweet_path %></li> 
-                <li><%=link_to 'My PicStories', user_path(current_user) %></li> 
+                <li><%=link_to 'My Tweets', tweet_path(current_user) %></li> 
                 <li><%=link_to 'My Profile', edit_user_registration_path %></li> 
-                <% if current_user.admin == true %> 
-                  <li><%=link_to 'Users Dashboard', dashboard_users_path(current_user) %></li>
-                <% end %>
                 <li role="separator" class="divider"></li> 
                 <li><%=link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
             <% else %> 
                 <li><%=link_to 'Sign In', new_user_session_path %></li> 
-                <li><%=link_to 'Sign Out', new_user_registration_path %></li> 
+                <li><%=link_to 'Sign Up', new_user_registration_path %></li> 
             <% end %>
         </li>
       </ul>

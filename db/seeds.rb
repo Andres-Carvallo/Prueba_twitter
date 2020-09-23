@@ -5,3 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Tweet.delete_all
+User.delete_all
+
+
+
+
+10.times do
+  User.create([{ name: Faker::Name.name, email: Faker::Internet.email, image_url: Faker::LoremPixel.image,  password:"123456" ,password_confirmation:"123456" }])
+end
+
+100.times do
+    user = rand(10)
+    Tweet.create([{ content: Faker::Lorem.paragraph, picture: Faker::LoremPixel.image, likes_number:0 , retweet_number:0, user_id: user}])
+end
