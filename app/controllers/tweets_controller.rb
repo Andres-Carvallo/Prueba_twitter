@@ -65,15 +65,15 @@ class TweetsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  def like
-    @tweetUser = TweetUser.where(tweet_id: params[:id], user_id: params[:user_id])
-    if params[:decision] == "true"
-      Like.where(tweet_id: params[:id]).find_each do |hw|
-        UserLike.create(user_id: params[:user_id], Like_id: like.id)
-      end
-    end
-    redirect_to tweet_path(current_user)
+  
+  def retweet
+    @user = current_user.id
+    @tweet = params[:id]
+    @content = params[:content]
+    rt_params = {user_id: @user, content: @content, retweet_id: @tweet}
+    @rt = Tweet.create(rt_params)
+    @rt.save!
+    redirect_to root_path
   end
 
 
@@ -85,11 +85,16 @@ class TweetsController < ApplicationController
     def set_tweet
       @tweet = Tweet.find(params[:id])
     end
+    
+
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:content, :user_id)
+      params.require(:tweet).permit(:content, :user_id, :tweet_id)
     end
+
+
+    
 
     
 end
