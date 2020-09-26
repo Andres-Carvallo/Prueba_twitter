@@ -1,15 +1,13 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :like]
 
   # GET /tweets
   # GET /tweets.json
   def index
 
     @tweets= Tweet.order('created_at DESC').page(params[:page]).per(50)
-  
-
-    
+    @tweet = Tweet.new
+    @like = Like.new
   
   end
 
@@ -31,6 +29,7 @@ class TweetsController < ApplicationController
   # POST /tweets.json
   def create
     @tweet = Tweet.new(tweet_params)
+    @tweet.user = current_user
 
     respond_to do |format|
       if @tweet.save
@@ -67,6 +66,20 @@ class TweetsController < ApplicationController
     end
   end
 
+  def like
+    @tweetUser = TweetUser.where(tweet_id: params[:id], user_id: params[:user_id])
+    if params[:decision] == "true"
+      Like.where(tweet_id: params[:id]).find_each do |hw|
+        UserLike.create(user_id: params[:user_id], Like_id: like.id)
+      end
+    end
+    redirect_to tweet_path(current_user)
+  end
+
+
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet
@@ -75,6 +88,8 @@ class TweetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tweet_params
-      params.require(:tweet).permit(:content, :picture, :retweet_number, :likes_number)
+      params.require(:tweet).permit(:content, :user_id)
     end
+
+    
 end

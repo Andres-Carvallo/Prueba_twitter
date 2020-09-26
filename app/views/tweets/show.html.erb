@@ -1,24 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Profile Picr:</strong>
+  <%= image_tag @tweet.user.image_url %>
+</p>
+
+<p>
   <strong>Content:</strong>
   <%= @tweet.content %>
 </p>
 
-<p>
-  <strong>Picture:</strong>
-  <%= @tweet.picture %>
-</p>
-
-<p>
-  <strong>Retweet number:</strong>
-  <%= @tweet.retweet_number %>
-</p>
-
-<p>
-  <strong>Likes number:</strong>
-  <%= @tweet.likes_number %>
-</p>
-
-<%= link_to 'Edit', edit_tweet_path(@tweet) %> |
+<td><%= link_to 'Edit', edit_tweet_path(@tweet) %></td>
+<td><%= link_to 'Destroy', @tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td> |
 <%= link_to 'Back', tweets_path %>

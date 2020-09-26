@@ -18,5 +18,7 @@ end
 
 100.times do
     user = rand(50)
-    Tweet.create([{ content: Faker::Lorem.paragraph, picture: Faker::LoremPixel.image, likes_number:0 , retweet_number:0, user_id: user}])
+    Tweet.create([{ content: Faker::Lorem.paragraph, user_id: user}])
 end
+
+
