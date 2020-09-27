@@ -30,7 +30,9 @@
                 <div class="mt-1 text-center"><%= tweet.user.name %></div>
               </div>
               </td>
-          <td><%= tweet.content %></td>
+          <td><div class = "container">
+              <%= tweet.content %></td>
+              </div>
           <td> <div class="d-flex flex-row ml-2">
                   <div class="mr-4"><%=tweet.likes.count %></div>
                   <div class="mr-3"><% if current_user.present? %>
