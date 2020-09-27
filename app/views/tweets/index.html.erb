@@ -17,7 +17,7 @@
                 <div class="ml-2">Retweet</div>
             <% end %>
         </th>
-        <th></th>
+        <th>Tweet Date</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -54,9 +54,16 @@
                 </div>
             </td>
           <td><% if current_user.present? %>
-                <%= link_to "Retweet", {:controller => :tweets, :action => :retweet, :id => tweet.id, :content => tweet.content }, method: :post,  class: "btn btn-primary"%></td>
+                <%= link_to "Retweet", {:controller => :tweets, :action => :retweet, :id => tweet.id, :content => tweet.content }, method: :post,  class: "btn btn-primary"%>
               <% end %>
-          <td><%= link_to 'Show', tweet %></td>
+          </td>
+
+          <td><% if (time_now - tweet.created_at) <= 3600 %>
+                <%= link_to  ("#{((time_now - tweet.created_at) * 0.016667).round(0)} Mins ago"), tweet %>
+              <% else %>
+                <%= link_to  ("#{((time_now - tweet.created_at) * 0.000277778).round(0)} Hrs ago"), tweet %>
+              <% end %>
+          <td>
        
           
         </tr>

@@ -14,7 +14,10 @@ class TweetsController < ApplicationController
   # GET /tweets/1
   # GET /tweets/1.json
   def show
+    @tweet_id = @tweet.id 
+    @likes = Like.where(tweet_id: @tweet_id)
   end
+
 
   # GET /tweets/new
   def new
