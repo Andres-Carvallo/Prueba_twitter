@@ -53,7 +53,7 @@
                   </div>
                 </div>
             </td>
-          <td><% if current_user.present? %>
+          <td><% if current_user.present? && current_user.id != tweet.user_id %>
                 <%= link_to "Retweet", {:controller => :tweets, :action => :retweet, :id => tweet.id, :content => tweet.content }, method: :post,  class: "btn btn-primary"%>
               <% end %>
           </td>
@@ -70,6 +70,8 @@
       <% end %>
     </tbody>
   </table>
-  <br>
+  <div class="d-flex justify-content-center"><%= paginate @tweets, :theme => 'custom'%></div>
   <%= paginate(@tweets) %>
+</div>
+  
 </div>
