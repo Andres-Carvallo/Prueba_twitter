@@ -21,4 +21,3 @@ end
     Tweet.create([{ content: Faker::Lorem.paragraph, user_id: user}])
 end
 
-
